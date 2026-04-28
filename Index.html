@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premnarayan Sadh – MIS Executive</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Variables ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d1b2a;
+      --ink:    #1a2d42;
+      --teal:   #00b4a6;
+      --teal2:  #007f75;
+      --sand:   #f5f0e8;
+      --cream:  #faf8f4;
+      --smoke:  #e8e3d9;
+      --muted:  #6b7c8f;
+      --white:  #ffffff;
+      --fs-xl:  clamp(2.4rem, 5vw, 4rem);
+      --fs-lg:  clamp(1.3rem, 2.5vw, 1.7rem);
+      --fs-md:  1.05rem;
+      --fs-sm:  0.88rem;
+      --radius: 12px;
+      --shadow: 0 8px 40px rgba(13,27,42,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── Scrollbar ──────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--sand); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+    /* ─── Nav ────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 62px;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--smoke);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ─── Hero ───────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 5vw 60px;
+      gap: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(0,180,166,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0,180,166,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+    .hero-eyebrow span {
+      display: inline-block; width: 32px; height: 2px;
+      background: var(--teal);
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: var(--fs-xl);
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+    .hero-desc {
+      font-size: var(--fs-md);
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 36px;
+      line-height: 1.75;
+    }
+    .hero-cta {
+      display: flex; gap: 14px; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--teal);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(0,180,166,0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(0,180,166,0.45); }
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border: 1.5px solid var(--smoke);
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid var(--smoke);
+      animation: floatCard 4s ease-in-out infinite;
+    }
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .card-avatar {
+      width: 64px; height: 64px;
+      background: linear-gradient(135deg, var(--teal), var(--teal2));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .card-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .card-role {
+      font-size: var(--fs-sm);
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .card-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat {
+      background: var(--sand);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 3px;
+      font-weight: 500;
+    }
+    .card-contact {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--smoke);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: var(--fs-sm);
+      color: var(--muted);
+    }
+    .contact-item svg { flex-shrink: 0; color: var(--teal); }
+
+    /* ─── Section Base ───────────────────────────────── */
+    section {
+      padding: 90px 5vw;
+    }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+    .section-label::after {
+      content: ''; display: block; width: 40px; height: 2px;
+      background: var(--teal);
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: var(--fs-lg);
+      color: var(--navy);
+      margin-bottom: 48px;
+      line-height: 1.2;
+    }
+
+    /* ─── Skills ─────────────────────────────────────── */
+    #skills { background: var(--navy); }
+    #skills .section-label { color: var(--teal); }
+    #skills h2 { color: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .skill-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .skill-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+    }
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 14px;
+    }
+    .skill-card h3 {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 7px;
+    }
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(0,180,166,0.15);
+      color: var(--teal);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── Experience ─────────────────────────────────── */
+    #experience { background: var(--sand); }
+
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .timeline-dot {
+      position: absolute; left: -35px; top: 6px;
+      width: 14px; height: 14px;
+      background: var(--teal);
+      border-radius: 50%;
+      border: 3px solid var(--sand);
+      box-shadow: 0 0 0 2px var(--teal);
+    }
+    .timeline-meta {
+      display: flex; align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .timeline-company {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.12rem;
+      color: var(--navy);
+    }
+    .timeline-date {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(0,180,166,0.1);
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+    .timeline-role {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .timeline-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .timeline-list li {
+      font-size: var(--fs-sm);
+      color: #445566;
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .timeline-list li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--teal);
+      font-size: 0.7rem;
+      top: 3px;
+    }
+
+    /* ─── Projects ───────────────────────────────────── */
+    #projects { background: var(--cream); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 30px 28px;
+      border: 1px solid var(--smoke);
+      box-shadow: 0 2px 16px rgba(13,27,42,0.05);
+      transition: transform 0.25s, box-shadow 0.25s;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s;
+    }
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .project-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: var(--smoke);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .project-date {
+      font-size: 0.75rem;
+      color: var(--teal);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .project-desc {
+      font-size: var(--fs-sm);
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .project-tech {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .tech-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: var(--sand);
+      color: var(--ink);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── Education ──────────────────────────────────── */
+    #education { background: var(--sand); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .edu-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px;
+      border-left: 4px solid var(--teal);
+      box-shadow: 0 2px 12px rgba(13,27,42,0.05);
+    }
+    .edu-year {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .edu-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .edu-card p {
+      font-size: var(--fs-sm);
+      color: var(--muted);
+    }
+
+    /* Certs */
+    .certs-list {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      margin-top: 36px;
+    }
+    .cert-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--white);
+      border: 1px solid var(--smoke);
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: var(--fs-sm);
+      font-weight: 500;
+      color: var(--ink);
+      box-shadow: 0 2px 8px rgba(13,27,42,0.04);
+    }
+    .cert-badge::before {
+      content: '🏅';
+      font-size: 1rem;
+    }
+
+    /* ─── Contact ─────────────────────────────────────── */
+    #contact {
+      background: var(--navy);
+      text-align: center;
+    }
+    #contact .section-label { color: var(--teal); justify-content: center; }
+    #contact .section-label::after { display: none; }
+    #contact .section-label::before { content: '—'; margin-right: 4px; color: var(--teal); }
+    #contact h2 { color: var(--white); text-align: center; }
+
+    .contact-grid {
+      display: flex; justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .contact-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50px;
+      padding: 12px 24px;
+      color: rgba(255,255,255,0.8);
+      font-size: var(--fs-sm);
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-chip:hover {
+      background: rgba(0,180,166,0.15);
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .contact-chip svg { color: var(--teal); }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 48px;
+    }
+
+    /* ─── Reveal Animation ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 80px;
+        text-align: center;
+      }
+      .hero-desc { margin: 0 auto 32px; }
+      .hero-cta { justify-content: center; }
+      .hero-visual { display: none; }
+      .nav-links { display: none; }
+      h2 { margin-bottom: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="#hero">PS</a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <section id="hero" class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow"><span></span> MIS Executive &amp; Developer</div>
+      <h1>Premnarayan<br /><em>Sadh</em></h1>
+      <p class="hero-desc">
+        Turning raw data into actionable insights. Specialising in MIS reporting,
+        dashboard automation, and real-time tracking systems that power smarter decisions.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 6.18 2 2 0 014.11 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Get In Touch
+        </a>
+        <a href="#experience" class="btn btn-outline">View Experience</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-avatar">PS</div>
+        <div class="card-name">Premnarayan Sadh</div>
+        <div class="card-role">MIS Executive</div>
+        <div class="card-stats">
+          <div class="stat">
+            <div class="stat-num">2+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Tools Mastered</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+        </div>
+        <div class="card-contact">
+          <div class="contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Indore, MP 452016
+          </div>
+          <div class="contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 6.18 2 2 0 014.11 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +91 77710 78851
+          </div>
+          <div class="contact-item">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            gurjarpawan74@gmail.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ─────────────────────────────────────────── -->
+  <section id="skills">
+    <div class="section-label">What I Do</div>
+    <h2 class="reveal">Technical Skills</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <h3>MIS &amp; Reporting</h3>
+        <div class="skill-tags">
+          <span class="tag">Google Sheets</span>
+          <span class="tag">MS Excel</span>
+          <span class="tag">KPI Tracking</span>
+          <span class="tag">Dashboards</span>
+          <span class="tag">Report Automation</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <h3>Automation &amp; Scripting</h3>
+        <div class="skill-tags">
+          <span class="tag">Google Apps Script</span>
+          <span class="tag">AppSheet</span>
+          <span class="tag">Workflow Automation</span>
+          <span class="tag">Data Validation</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🌐</div>
+        <h3>Web Development</h3>
+        <div class="skill-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">React.js</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">Bootstrap</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <h3>Database &amp; Tools</h3>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">Git</span>
+          <span class="tag">Google Forms</span>
+          <span class="tag">MS Office</span>
+        </div>
+      </div>
+
+
+      <div class="skill-card reveal">
+  <div class="skill-icon">🤖</div>
+  <h3>AI Tools</h3>
+  <div class="skill-tags">
+    <span class="tag">ChatGPT</span>
+    <span class="tag">Perplexity</span>
+    <span class="tag">Manus AI</span>
+    <span class="tag">GitHub Copilot</span>
+    <span class="tag">Google Cloud AI</span>
+    <span class="tag">Meta AI</span>
+    <span class="tag">Pi (Voice AI)</span>
+  </div>
+</div>
+
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤝</div>
+        <h3>Soft Skills</h3>
+        <div class="skill-tags">
+          <span class="tag">Analytical Thinking</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Attention to Detail</span>
+          <span class="tag">Team Collaboration</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ─────────────────────────────────────── -->
+  <section id="experience">
+    <div class="section-label">Career</div>
+    <h2 class="reveal">Work Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-company">Parag Copigraph Pvt. Ltd.</span>
+          <span class="timeline-date">Jun 2025 – Present</span>
+        </div>
+        <div class="timeline-role">MIS Executive / Front-End Developer</div>
+        <ul class="timeline-list">
+          <li>Designed and maintained MIS reports and dashboards using Google Sheets and Excel for daily operational tracking.</li>
+          <li>Developed automated data entry and validation systems using Google Apps Script, reducing manual errors.</li>
+          <li>Built a QR-based production tracking system enabling real-time process monitoring and status reporting.</li>
+          <li>Created an attendance management system with automated entry validation, real-time updates, and summary reports.</li>
+          <li>Collaborated with management to identify reporting needs and delivered actionable data insights.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-company">Umbrella Protection Systems Pvt. Ltd.</span>
+          <span class="timeline-date">Dec 2024 – May 2025</span>
+        </div>
+        <div class="timeline-role">Front-End Developer Intern</div>
+        <ul class="timeline-list">
+          <li>Built responsive interfaces and data dashboards using HTML, CSS, JavaScript, and React.js.</li>
+          <li>Developed "TradeBot" – automated trading dashboard with real-time data tracking, portfolio management, and role-based access.</li>
+          <li>Collaborated during Agile sprints to deliver scalable front-end modules.</li>
+          <li>Assisted in preparing weekly performance reports and tracking KPIs for the trading platform.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PROJECTS ───────────────────────────────────────── -->
+  <section id="projects">
+    <div class="section-label">Portfolio</div>
+    <h2 class="reveal">Key Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <h3>Attendance &amp; MIS Automation Tool</h3>
+        <div class="project-date">Jun 2025 – Present</div>
+        <p class="project-desc">
+          Automated daily attendance records and generated summary MIS reports for management.
+          Reduced manual data entry time and improved report accuracy through validation scripts.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Google Apps Script</span>
+          <span class="tech-tag">Google Sheets</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <h3>Smart Waste Management System</h3>
+        <div class="project-date">Dec 2024 – Jan 2025</div>
+        <p class="project-desc">
+          Built a waste pickup request and recycling centre tracking system with real-time location tracking.
+          Used Firebase for live data storage and dynamic request handling.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">React.js</span>
+          <span class="tech-tag">Firebase</span>
+          <span class="tech-tag">Leaflet.js</span>
+          <span class="tech-tag">OpenStreetMap</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <h3>Data Analysis &amp; Visualisation Dashboard</h3>
+        <div class="project-date">Aug 2024</div>
+        <p class="project-desc">
+          Created interactive charts and graphs for data trend analysis and insight reporting,
+          enabling non-technical stakeholders to interpret operational data effortlessly.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Chart.js</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">04</div>
+        <h3>TradeBot – Automated Trading Dashboard</h3>
+        <div class="project-date">Dec 2024 – May 2025</div>
+        <p class="project-desc">
+          Responsive UI with real-time order tracking, portfolio management, secure routing,
+          role-based access control, and mobile-friendly dynamic components.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">React.js</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">CSS3</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">05</div>
+        <h3>Personal Portfolio Website</h3>
+        <div class="project-date">Jan 2024 – Feb 2024</div>
+        <p class="project-desc">
+          Developed a fully responsive personal portfolio showcasing skills and projects
+          with clean UI and smooth navigation experience.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">HTML5</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── EDUCATION ──────────────────────────────────────── -->
+  <section id="education">
+    <div class="section-label">Background</div>
+    <h2 class="reveal">Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">2021 – 2023</div>
+        <h3>MBA – Finance</h3>
+        <p>RKDF College of Engineering, Bhopal</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2018 – 2021</div>
+        <h3>Bachelor of Commerce</h3>
+        <p>Indore International College, Indore</p>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:52px;">Credentials</div>
+    <h2 class="reveal" style="margin-bottom:0;">Certifications</h2>
+    <div class="certs-list reveal">
+      <div class="cert-badge">JavaScript Certification – KG Coding (Prashant Jain)</div>
+      <div class="cert-badge">Full-Stack Developer – Programmers Point Indore</div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="section-label">Reach Out</div>
+    <h2>Let's Connect</h2>
+    <div class="contact-grid">
+      <a href="tel:+917771078851" class="contact-chip">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 6.18 2 2 0 014.11 2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +91 77710 78851
+      </a>
+      <a href="mailto:gurjarpawan74@gmail.com" class="contact-chip">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        gurjarpawan74@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/premnarayan-sadh-09997a287" target="_blank" rel="noopener" class="contact-chip">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zm2-5a2 2 0 110 4 2 2 0 010-4z"/></svg>
+        LinkedIn Profile
+      </a>
+      <div class="contact-chip">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Indore, MP 452016
+      </div>
+    </div>
+    <p class="footer-copy">© 2025 Premnarayan Sadh. All rights reserved.</p>
+  </section>
+
+  <!-- ── JS: Scroll Reveal ──────────────────────────────── -->
+  <script>
+    (function () {
+      // Reveal on scroll
+      var revealEls = document.querySelectorAll('.reveal, .timeline-item, .project-card');
+
+      function checkReveal() {
+        var windowH = window.innerHeight;
+        revealEls.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < windowH - 60) {
+            el.classList.add('visible');
+          }
+        });
+      }
+
+      // Stagger project cards
+      var projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(function (card, i) {
+        card.style.transitionDelay = (i * 0.1) + 's';
+      });
+
+      // Stagger skill cards
+      var skillCards = document.querySelectorAll('.skill-card');
+      skillCards.forEach(function (card, i) {
+        card.style.transitionDelay = (i * 0.08) + 's';
+      });
+
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      checkReveal();
+
+      // Smooth active nav highlight
+      var sections = document.querySelectorAll('section[id]');
+      var navLinks = document.querySelectorAll('.nav-links a');
+
+      window.addEventListener('scroll', function () {
+        var scrollY = window.scrollY + 80;
+        sections.forEach(function (sec) {
+          if (scrollY >= sec.offsetTop && scrollY < sec.offsetTop + sec.offsetHeight) {
+            navLinks.forEach(function (a) { a.style.color = ''; });
+            var active = document.querySelector('.nav-links a[href="#' + sec.id + '"]');
+            if (active) { active.style.color = 'var(--teal)'; }
+          }
+        });
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>
